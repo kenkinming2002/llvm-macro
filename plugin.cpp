@@ -288,6 +288,9 @@ public:
               if(alignment == 0)
                 report_fatal_error("alignment argument passed to void *macro_array(size_t id, size_t size, size_t alignment) must be a non-zero");
 
+              if(!isPowerOf2_64(alignment))
+                report_fatal_error("alignment argument passed to void *macro_array(size_t id, size_t size, size_t alignment) must be power of 2");
+
               if(size % alignment != 0)
                 report_fatal_error("alignment argument passed to void *macro_array(size_t id, size_t size, size_t alignment) must divide size");
 
