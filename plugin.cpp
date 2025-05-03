@@ -151,7 +151,7 @@ public:
       {
         macroArray = &function;
         if(functionIsDefined(*macroArray) || !functionCheckSignature(*macroArray, opaquePointerType, {sizeType, sizeType, sizeType}))
-          report_fatal_error("invalid definition of macro_array: macro_array must be a external function with the following signature (without name mangling): void *macro_array(int id, size_t size)", false);
+          report_fatal_error("invalid definition of macro_array: macro_array must be a external function with the following signature (without name mangling): void *macro_array(size_t id, size_t size, size_t alignment)", false);
       }
     }
 
