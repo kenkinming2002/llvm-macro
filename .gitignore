@@ -1,5 +1,5 @@
 /libplugin.so
-/macro.ll
-/macro.bc
+/test-macro.ll
+/test-macro.bc
 /test.ll
 /test
