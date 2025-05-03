@@ -8,7 +8,7 @@ endif
 TEST_CXX ?= clang++
 TEST_CXXFLAGS ?= -g
 
-libplugin.so: plugin.cpp
+libmacro.so: macro.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $< $(LLVM_CFLAGS) -shared -fPIC
 
 test-macro.ll: test-macro.cpp macro.h
@@ -17,11 +17,11 @@ test-macro.ll: test-macro.cpp macro.h
 test-macro.bc: test-macro.cpp macro.h
 	$(TEST_CXX) $(TEST_CXXFLAGS) -o $@ $< -Xclang -disable-O0-optnone -c -emit-llvm
 
-test.ll: test.cpp libplugin.so test-macro.bc
-	$(TEST_CXX) $(TEST_CXXFLAGS) -o $@ $< -fplugin=./libplugin.so -fpass-plugin=./libplugin.so -mllvm -macro -mllvm test-macro.bc -S -emit-llvm
+test.ll: test.cpp libmacro.so test-macro.bc
+	$(TEST_CXX) $(TEST_CXXFLAGS) -o $@ $< -fplugin=./libmacro.so -fpass-plugin=./libmacro.so -mllvm -macro -mllvm test-macro.bc -S -emit-llvm
 
-test: test.cpp libplugin.so test-macro.bc
-	$(TEST_CXX) $(TEST_CXXFLAGS) -o $@ $< -fplugin=./libplugin.so -fpass-plugin=./libplugin.so -mllvm -macro -mllvm test-macro.bc
+test: test.cpp libmacro.so test-macro.bc
+	$(TEST_CXX) $(TEST_CXXFLAGS) -o $@ $< -fplugin=./libmacro.so -fpass-plugin=./libmacro.so -mllvm -macro -mllvm test-macro.bc
 
 .PHONY: all
 all: test-macro.ll test-macro.bc test.ll test
@@ -35,5 +35,5 @@ clean-test:
 
 .PHONY: clean
 clean: clean-test
-	- rm -f libplugin.so
+	- rm -f libmacro.so
 

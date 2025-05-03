@@ -1,4 +1,4 @@
-/libplugin.so
+/libmacro.so
 /test-macro.ll
 /test-macro.bc
 /test.ll
