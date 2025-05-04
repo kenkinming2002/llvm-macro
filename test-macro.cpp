@@ -12,8 +12,7 @@ static int roulette(int a)
 
 static void say_hello(void)
 {
-  static int next_id;
-  printf("%*s => Hello from macro => id %d, called %d times\n", indent, "", next_id, ++macro_local(int));
+  printf("%*s => Hello from macro %zu/%zu => called %d times\n", indent, "", macro_index(), macro_count(), ++macro_local(int));
 }
 
 void macro_def(void)
